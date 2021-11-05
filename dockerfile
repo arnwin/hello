@@ -1,7 +1,11 @@
-FROM nginx:alpine
 
-ENV TIMEZONE Europe/Paris
-RUN apk update && apk upgrade
 
-EXPOSE 80
-ENTRYPOINT ["/usr/sbin/nginx","-g","daemon off;"]
+ARG version=3.13
+FROM alpine:$version
+ARG VERSION
+
+ENV MSG "Hello world !!"
+RUN echo "$MSG" > /var/log/nginx
+WORKDIR /opt
+
+CMD ["cat","/var/log/nginx"]
